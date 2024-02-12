@@ -6,9 +6,8 @@ NULLABLE = {'blank': True, 'null': True}
 
 class Course(models.Model):
     name = models.CharField(max_length=100, verbose_name='Course name')
-    course_image = models.ImageField(upload_to='course', verbose_name='Course image')
+    course_image = models.ImageField(upload_to='course', **NULLABLE, verbose_name='Course image')
     description = models.TextField(verbose_name='Course description')
-    #link = models.CharField(max_length=200, verbose_name='Course link')
 
     def __str__(self):
         return f'{self.name}'
@@ -20,7 +19,7 @@ class Course(models.Model):
 
 class Lesson(models.Model):
     name = models.CharField(max_length=100, verbose_name='Lesson name')
-    lesson_image = models.ImageField(upload_to='course', verbose_name='Lesson image')
+    lesson_image = models.ImageField(upload_to='course', **NULLABLE, verbose_name='Lesson image')
     description = models.TextField(verbose_name='Lesson description')
     link = models.CharField(max_length=200, verbose_name='Lesson link')
     course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name='Course pk')
