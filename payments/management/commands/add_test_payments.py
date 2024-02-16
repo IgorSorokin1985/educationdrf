@@ -1,12 +1,12 @@
 from django.core.management import BaseCommand
-from users.models import Payment, User
+from payments.models import Payment
 
 
 test_payments = [
     {
         "user_id": 1,
         "date": "2024-02-01",
-        "course_id": 2,
+        "course_id": 1,
         "amount": 10000,
         "method": "T",
     },
