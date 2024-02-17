@@ -25,7 +25,7 @@ class Lesson(models.Model):
     description = models.TextField(verbose_name='Lesson description')
     link = models.CharField(max_length=200, verbose_name='Lesson link')
     course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name='Course pk')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='user')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, **NULLABLE, verbose_name='user')
 
     def __str__(self):
         return f'Lesson - {self.name}'
