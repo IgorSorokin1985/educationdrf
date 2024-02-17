@@ -1,4 +1,4 @@
-from users.views import UserCreateAPIView, UserUpdateAPIView, UserDestroyAPIView, UserRetrieveAPIView
+from users.views import UserCreateAPIView, UserUpdateAPIView, UserDestroyAPIView, UserRetrieveAPIView, UserListAPIView
 from rest_framework.routers import DefaultRouter
 from users.apps import UsersConfig
 from django.urls import path
@@ -14,4 +14,5 @@ urlpatterns = [
     path('user/delete/<int:pk>/', UserDestroyAPIView.as_view(), name='user_delete'),
     path('user/update/<int:pk>/', UserUpdateAPIView.as_view(), name='user_update'),
     path('user/<int:pk>/', UserRetrieveAPIView.as_view(), name='user_detail'),
+    path('user/list/', UserListAPIView.as_view(), name='user_list'),
 ]
