@@ -8,8 +8,8 @@ def wrong_links_validator(text):
     having_wrong_links = []
     for word in words:
         for example_link in example_links:
-            if example_link in word:
-                if right_link in word:
+            if example_link in word.lower():
+                if right_link in word.lower():
                     continue
                 else:
                     having_wrong_links.append(word)
