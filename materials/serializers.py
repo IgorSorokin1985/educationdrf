@@ -5,8 +5,6 @@ from subscription.models import Subscription
 
 
 class LessonsSerializer(serializers.ModelSerializer):
-    name = serializers.CharField(validators=[wrong_links_validator])
-    description = serializers.CharField(validators=[wrong_links_validator])
     link = serializers.CharField(validators=[wrong_links_validator])
 
     class Meta:
@@ -18,8 +16,6 @@ class CourseSerializer(serializers.ModelSerializer):
     count_lessons = serializers.SerializerMethodField()
     course_subscription = serializers.SerializerMethodField()
     lessons = LessonsSerializer(source="lesson_set", many=True, read_only=True)
-    name = serializers.CharField(validators=[wrong_links_validator])
-    description = serializers.CharField(validators=[wrong_links_validator])
 
     class Meta:
         model = Course
@@ -38,8 +34,6 @@ class CourseSerializer(serializers.ModelSerializer):
 
 
 class LessonSerializer(serializers.ModelSerializer):
-    name = serializers.CharField(validators=[wrong_links_validator])
-    description = serializers.CharField(validators=[wrong_links_validator])
     link = serializers.CharField(validators=[wrong_links_validator])
 
     class Meta:
