@@ -9,7 +9,7 @@ class Course(models.Model):
     name = models.CharField(max_length=100, verbose_name='Course name')
     course_image = models.ImageField(upload_to='course', **NULLABLE, verbose_name='Course image')
     description = models.TextField(verbose_name='Course description')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='user')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, **NULLABLE, verbose_name='user')
 
     def __str__(self):
         return f'{self.name}'
