@@ -4,12 +4,18 @@ from rest_framework.response import Response
 from materials.models import Course
 from subscription.models import Subscription
 from django.shortcuts import get_object_or_404
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 
 # Create your views here.
 
 
 class SubscriptionAPIView(APIView):
 
+    user = openapi.Parameter('user', openapi.IN_QUERY, description="user_id", type=openapi.TYPE_NUMBER)
+    course = openapi.Parameter('course', openapi.IN_QUERY, description="course_id", type=openapi.TYPE_NUMBER)
+
+    @swagger_auto_schema(operation_description="This endpoint allows create and delete subscription", manual_parameters= [user, course], responses={200: 'Subscription deleted/Subscription created'})
     def post(self, *args, **kwargs):
         user = self.request.user
         course_id = self.request.data["course"]
