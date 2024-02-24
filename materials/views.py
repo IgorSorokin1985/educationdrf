@@ -8,6 +8,11 @@ from materials.models import Course, Lesson
 from rest_framework.permissions import IsAuthenticated
 from users.permissions import IsModerator, IsOwner
 from materials.paginators import MaterialsPagination
+from rest_framework.views import APIView
+from django.shortcuts import get_object_or_404
+from materials.utils import get_url_for_payment
+from payments.models import Payment
+
 # Create your views here.
 
 
@@ -70,3 +75,31 @@ class LessonRetrieveAPIView(generics.RetrieveAPIView):
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
     permission_classes = [IsAuthenticated, IsModerator | IsOwner]
+
+
+class CoursePaymentAPIView(APIView):
+
+    def post(self, *args, **kwargs):
+        user = self.request.user
+        course_id = self.request.data["course"]
+
+        course_item = get_object_or_404(Course, pk=course_id)
+
+        if course_item:
+            url_for_payment = get_url_for_payment(course_item)
+            message = 'Right id of course'
+            data = {
+                "user": user,
+                "date": "2024-02-24",
+                "course": course_item,
+                "amount": course_item.price,
+                "method": "T",
+                "url_for_payment": url_for_payment,
+                "status": "P",
+            }
+            payment = Payment.objects.create(**data)
+            payment.save()
+            return Response({"message": message, "url": url_for_payment})
+        else:
+            message = 'Wrong id of course'
+            return Response({"message": message})
