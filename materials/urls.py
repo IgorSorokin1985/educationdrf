@@ -2,7 +2,7 @@ from materials.views import CourseViewSet
 from rest_framework.routers import DefaultRouter
 from materials.apps import MaterialsConfig
 from django.urls import path
-from materials.views import LessonCreateAPIView, LessonDestroyAPIView, LessonListAPIView, LessonUpdateAPIView, LessonRetrieveAPIView
+from materials.views import LessonCreateAPIView, LessonDestroyAPIView, LessonListAPIView, LessonUpdateAPIView, LessonRetrieveAPIView, CoursePaymentAPIView
 # Описание маршрутизации для ViewSet
 
 app_name = MaterialsConfig.name
@@ -15,4 +15,5 @@ urlpatterns = [
     path('lesson/update/<int:pk>/', LessonUpdateAPIView.as_view(), name='lesson_update'),
     path('lesson/<int:pk>/', LessonRetrieveAPIView.as_view(), name='lesson_detail'),
     path('lesson/', LessonListAPIView.as_view(), name='lesson_list'),
+    path('course/payment/', CoursePaymentAPIView.as_view(), name='course_payment'),
 ] + router.urls

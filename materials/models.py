@@ -10,6 +10,7 @@ class Course(models.Model):
     course_image = models.ImageField(upload_to='course', **NULLABLE, verbose_name='Course image')
     description = models.TextField(verbose_name='Course description')
     user = models.ForeignKey(User, on_delete=models.CASCADE, **NULLABLE, verbose_name='user')
+    price = models.PositiveIntegerField(default=1000, verbose_name='Price course')
 
     def __str__(self):
         return f'{self.name}'
@@ -26,6 +27,7 @@ class Lesson(models.Model):
     link = models.CharField(max_length=200, verbose_name='Lesson link')
     course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name='Course pk')
     user = models.ForeignKey(User, on_delete=models.CASCADE, **NULLABLE, verbose_name='user')
+    price = models.PositiveIntegerField(default=100, verbose_name='Price lesson')
 
     def __str__(self):
         return f'Lesson - {self.name}'
